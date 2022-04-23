@@ -12,6 +12,7 @@ class MainViewController: UIViewController {
         let tableView = UITableView()
         tableView.register(CustomTableViewCell.self,
                            forCellReuseIdentifier: CustomTableViewCell.identifier)
+        tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
 
@@ -19,6 +20,7 @@ class MainViewController: UIViewController {
         super.viewDidLoad()
         tableView.dataSource = self
         tableView.delegate = self
+        setupView()
     }
     
     private func setupView() {
