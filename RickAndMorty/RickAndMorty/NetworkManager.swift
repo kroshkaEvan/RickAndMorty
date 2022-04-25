@@ -16,7 +16,7 @@ class NetworkManager {
     func fetchCharacter(completed: @escaping CompletionClosure) {
         let urlString = Constants.Strings.URL + "/character)"
         guard let url = URL(string: urlString) else { return }
-        let task = URLSession.shared.dataTask(with: url) { (data, response, _) in
+        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
             guard let response = response as? HTTPURLResponse, response.statusCode == 200 else { return }
             guard let data = data else { return }
             do {
@@ -25,6 +25,9 @@ class NetworkManager {
                 let characterCount = try decoder.decode(Character.self, from: data)
                 completed(.success(characterCount))
             } catch { return }
+            if let error = error {
+                print("\(error)")
+            }
         }
         task.resume()
     }
@@ -32,9 +35,12 @@ class NetworkManager {
     func fetchPagesCharacters(page: Int, completed: @escaping CompletionClosure) {
         let urlString = Constants.Strings.URL + "/character/?page=\(page)"
         guard let url = URL(string: urlString) else { return }
-        let task = URLSession.shared.dataTask(with: url) { (data, response, _) in
+        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
             guard let response = response as? HTTPURLResponse, response.statusCode == 200 else { return }
             guard let data = data else { return }
+            if let error = error {
+                print("\(error)")
+            }
             do {
                 let decoder = JSONDecoder()
                 decoder.keyDecodingStrategy = .convertFromSnakeCase
@@ -45,3 +51,4 @@ class NetworkManager {
         task.resume()
     }
 }
+

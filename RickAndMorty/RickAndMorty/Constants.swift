@@ -6,10 +6,25 @@
 //
 
 import Foundation
+import UIKit
 
 class Constants {
     class Strings {
         static let URL = "https://rickandmortyapi.com/api"
         static let imageURL = "https://rickandmortyapi.com/api/character/avatar/1.jpeg"
+    }
+    
+    class Font {
+        static let customFont = UIFont(name: "get schwifty",
+                             size: 20)
+        static let nameFont = UIFont(name: "get schwifty",
+                             size: 28)
+    }
+    
+    class Color {
+        static let nameColor = UIColor(red: 99 / 255,
+                                       green: 210 / 255,
+                                       blue: 166 / 255,
+                                       alpha: 1)
     }
 }

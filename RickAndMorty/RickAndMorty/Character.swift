@@ -9,7 +9,7 @@ import Foundation
 
 struct Character: Codable {
     let info: Info
-    let allCharacter: [Result]
+    let results: [Result]
 }
 
 struct Result: Codable {
@@ -19,10 +19,10 @@ struct Result: Codable {
     let species: String
     let gender: String
     let episode: [String]
+    let location: Location
     let image: String
     let url: String
     let created: String
-    let location: Location
     let origin: Location
 }
 
