@@ -124,6 +124,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         detailVC.genderLabel.text = indexPathTapped.gender
         detailVC.statusLabel.text = indexPathTapped.status
         detailVC.locationLabel.text = indexPathTapped.location.name
+        detailVC.episodes = indexPathTapped.episode
         let navigationVc = UINavigationController(rootViewController: detailVC)
         navigationVc.modalPresentationStyle = .fullScreen
         navigationVc.navigationBar.tintColor = .darkGray

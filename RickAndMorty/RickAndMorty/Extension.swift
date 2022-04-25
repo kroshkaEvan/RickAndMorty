@@ -17,9 +17,9 @@ extension UILabel {
     }
     
     func addDescriptionLabel() {
-        textColor = .lightGray
-        textAlignment = .left
-        font = .systemFont(ofSize: 20)
+        font = Constants.Font.customFont
+        textColor = Constants.Color.nameColor
+        textAlignment = .center
         translatesAutoresizingMaskIntoConstraints = false
     }
     

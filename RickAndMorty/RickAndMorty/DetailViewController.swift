@@ -8,7 +8,6 @@
 import UIKit
 
 class DetailViewController: UIViewController {
-    
     private lazy var scrollView: UIScrollView = {
         let view = UIScrollView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -32,6 +31,7 @@ class DetailViewController: UIViewController {
     lazy var nameLabel: UILabel = {
         let label = UILabel()
         label.addDescriptionLabel()
+        label.font = Constants.Font.nameFont
         return label
     }()
     
@@ -62,19 +62,25 @@ class DetailViewController: UIViewController {
     lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.backgroundColor = .darkGray
-        tableView.register(CustomTableViewCell.self,
-                           forCellReuseIdentifier: CustomTableViewCell.identifier)
+        tableView.register(DetailTableViewCell.self,
+                           forCellReuseIdentifier: DetailTableViewCell.identifier)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
     
+    var episodes = [String]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .darkGray
+        tableView.delegate = self
+        tableView.dataSource = self
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Back".localizated(),
                                                            style: .done,
                                                            target: self,
                                                            action: #selector(didTapBack))
+        self.tableView.reloadData()
+        print("\(episodes)")
         setupScrollView()
         setupUI()
     }
@@ -94,19 +100,19 @@ class DetailViewController: UIViewController {
     
     private func setupUI() {
         let distanceY = CGFloat(10)
-        let sizeIcon = CGFloat(220)
+        let sizeIcon = CGFloat(240)
         [iconCharacterImageView, nameLabel, speciesLabel, genderLabel, statusLabel, locationLabel, tableView].forEach { contentView.addSubview($0) }
         iconCharacterImageView.layer.cornerRadius = sizeIcon / 2
         iconCharacterImageView.topAnchor.constraint(equalTo: contentView.topAnchor,
-                                           constant: 50).isActive = true
+                                                    constant: 50).isActive = true
         iconCharacterImageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
         iconCharacterImageView.widthAnchor.constraint(equalToConstant: sizeIcon).isActive = true
         iconCharacterImageView.heightAnchor.constraint(equalToConstant: sizeIcon).isActive = true
         nameLabel.topAnchor.constraint(equalTo: iconCharacterImageView.bottomAnchor,
-                                                  constant: distanceY).isActive = true
+                                       constant: distanceY).isActive = true
         nameLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
         nameLabel.widthAnchor.constraint(equalTo: contentView.widthAnchor,
-                                                    multiplier: 0.8).isActive = true
+                                         multiplier: 0.9).isActive = true
         speciesLabel.setupUI(view: contentView, top: nameLabel)
         genderLabel.setupUI(view: contentView, top: speciesLabel)
         statusLabel.setupUI(view: contentView, top: genderLabel)
@@ -115,14 +121,13 @@ class DetailViewController: UIViewController {
                                        constant: distanceY).isActive = true
         tableView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
         tableView.widthAnchor.constraint(equalTo: contentView.widthAnchor,
-                                                    multiplier: 0.6).isActive = true
+                                         multiplier: 0.6).isActive = true
         tableView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor,
-                                                  constant: -distanceY).isActive = true
+                                          constant: -distanceY).isActive = true
     }
     
     func getImageFromURL(id: String) {
         let url: URL = URL(string: "https://rickandmortyapi.com/api/character/avatar/\(id).jpeg")!
-
         let dataTask = URLSession.shared.dataTask(with: url) { [weak self] (data, _, _) in
             if let data = data {
                 DispatchQueue.main.async {
@@ -135,5 +140,29 @@ class DetailViewController: UIViewController {
     
     @objc private func didTapBack() {
         dismiss(animated: true, completion: nil)
+    }
+}
+
+extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.episodes.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: DetailTableViewCell.identifier,
+                                                 for: indexPath)
+        if let cell = cell as? DetailTableViewCell {
+            cell.episodeLabel.text = episodes[indexPath.row]
+        }
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 20
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }
