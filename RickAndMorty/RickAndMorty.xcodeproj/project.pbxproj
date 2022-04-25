@@ -19,6 +19,8 @@
 		BC9C742E28149520007E28E1 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC9C742D28149520007E28E1 /* Extension.swift */; };
 		BC9C74302816D144007E28E1 /* get_schwifty.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BC9C742F2816D144007E28E1 /* get_schwifty.ttf */; };
 		BC9C74322816FD4E007E28E1 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC9C74312816FD4E007E28E1 /* LoadingView.swift */; };
+		BC9C74342817310F007E28E1 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC9C74332817310F007E28E1 /* DetailViewController.swift */; };
+		BC9C7436281741AA007E28E1 /* Samson.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BC9C7435281741AA007E28E1 /* Samson.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +38,8 @@
 		BC9C742D28149520007E28E1 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		BC9C742F2816D144007E28E1 /* get_schwifty.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = get_schwifty.ttf; sourceTree = "<group>"; };
 		BC9C74312816FD4E007E28E1 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		BC9C74332817310F007E28E1 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		BC9C7435281741AA007E28E1 /* Samson.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Samson.ttf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,12 +76,14 @@
 				BC9C741328142B44007E28E1 /* SceneDelegate.swift */,
 				BC9C741528142B44007E28E1 /* MainViewController.swift */,
 				BC9C742528142DA1007E28E1 /* CustomTableViewCell.swift */,
+				BC9C74332817310F007E28E1 /* DetailViewController.swift */,
 				BC9C74272814360F007E28E1 /* Character.swift */,
 				BC9C74312816FD4E007E28E1 /* LoadingView.swift */,
 				BC9C742928143905007E28E1 /* NetworkManager.swift */,
 				BC9C742B2814391E007E28E1 /* Constants.swift */,
 				BC9C742D28149520007E28E1 /* Extension.swift */,
 				BC9C742F2816D144007E28E1 /* get_schwifty.ttf */,
+				BC9C7435281741AA007E28E1 /* Samson.ttf */,
 				BC9C741A28142B49007E28E1 /* Assets.xcassets */,
 				BC9C741C28142B49007E28E1 /* LaunchScreen.storyboard */,
 				BC9C741F28142B49007E28E1 /* Info.plist */,
@@ -146,6 +152,7 @@
 				BC9C741E28142B49007E28E1 /* LaunchScreen.storyboard in Resources */,
 				BC9C74302816D144007E28E1 /* get_schwifty.ttf in Resources */,
 				BC9C741B28142B49007E28E1 /* Assets.xcassets in Resources */,
+				BC9C7436281741AA007E28E1 /* Samson.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -163,6 +170,7 @@
 				BC9C742C2814391E007E28E1 /* Constants.swift in Sources */,
 				BC9C742628142DA1007E28E1 /* CustomTableViewCell.swift in Sources */,
 				BC9C741428142B44007E28E1 /* SceneDelegate.swift in Sources */,
+				BC9C74342817310F007E28E1 /* DetailViewController.swift in Sources */,
 				BC9C742E28149520007E28E1 /* Extension.swift in Sources */,
 				BC9C74322816FD4E007E28E1 /* LoadingView.swift in Sources */,
 			);

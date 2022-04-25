@@ -21,20 +21,20 @@ class CustomTableViewCell: UITableViewCell {
     
     lazy var nameLabel: UILabel = {
         let label = UILabel()
-        label.addDescriptionLabel()
+        label.addCustomLabel()
         label.font = Constants.Font.nameFont
         return label
     }()
     
     lazy var speciesLabel: UILabel = {
         let label = UILabel()
-        label.addDescriptionLabel()
+        label.addCustomLabel()
         return label
     }()
     
     lazy var genderLabel: UILabel = {
         let label = UILabel()
-        label.addDescriptionLabel()
+        label.addCustomLabel()
         return label
     }()
     
@@ -74,7 +74,6 @@ class CustomTableViewCell: UITableViewCell {
     
     func getImageFromURL(id: String) {
         let url: URL = URL(string: "https://rickandmortyapi.com/api/character/avatar/\(id).jpeg")!
-
         let dataTask = URLSession.shared.dataTask(with: url) { [weak self] (data, _, _) in
             if let data = data {
                 DispatchQueue.main.async {

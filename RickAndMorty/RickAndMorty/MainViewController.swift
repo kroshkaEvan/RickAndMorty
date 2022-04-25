@@ -27,6 +27,7 @@ class MainViewController: UIViewController {
     private var results = [Result]()
     private var characterCount = 0
     private var page = 1
+    private let delay = 1
     private var hasMoreContent = true
 
     override func viewDidLoad() {
@@ -68,7 +69,7 @@ class MainViewController: UIViewController {
             case .success(let response):
                 if self.results.count < self.characterCount { self.hasMoreContent = false }
                 self.results += response.results
-                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .seconds(1), execute: { () -> Void in
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .seconds(self.delay), execute: { () -> Void in
                     self.tableView.reloadData()
                     self.hideLoading()
                 })
@@ -82,7 +83,7 @@ class MainViewController: UIViewController {
 extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return results.count
+        return self.results.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -100,10 +101,10 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
             default : cell.speciesLabel.textColor = .brown
             }
             cell.genderLabel.text = results[indexPath.row].gender
-            if cell.genderLabel.text == "Male" {
-                cell.genderLabel.textColor = .blue
-            } else {
-                cell.genderLabel.textColor = .systemPink
+            switch cell.genderLabel.text {
+            case "Male" : cell.genderLabel.textColor = .blue
+            case "Female" : cell.genderLabel.textColor = .systemPink
+            default : cell.genderLabel.textColor = .white
             }
         }
         return cell
@@ -115,6 +116,18 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        let detailVC = DetailViewController()
+        let indexPathTapped = self.results[indexPath.row]
+        detailVC.getImageFromURL(id: String(indexPathTapped.id))
+        detailVC.nameLabel.text = indexPathTapped.name
+        detailVC.speciesLabel.text = indexPathTapped.species
+        detailVC.genderLabel.text = indexPathTapped.gender
+        detailVC.statusLabel.text = indexPathTapped.status
+        detailVC.locationLabel.text = indexPathTapped.location.name
+        let navigationVc = UINavigationController(rootViewController: detailVC)
+        navigationVc.modalPresentationStyle = .fullScreen
+        navigationVc.navigationBar.tintColor = .darkGray
+        self.present(navigationVc, animated: true)
     }
     
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
@@ -123,9 +136,8 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         let height = scrollView.height
         if contentOffsetY > contentHeight - height {
             guard hasMoreContent else { return }
-            page += 1
+            self.page += 1
             fetchNewCharacters(page: page)
         }
     }
 }
-
