@@ -17,6 +17,12 @@ class MainViewController: UIViewController {
         return tableView
     }()
     
+    private lazy var loadingView: LoadingView = {
+        let loading =  LoadingView()
+        loading.layer.zPosition = 999
+        return loading
+    }()
+    
     private var characters: Character?
     private var results = [Result]()
     private var characterCount = 0
@@ -40,8 +46,21 @@ class MainViewController: UIViewController {
         tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
     }
     
+    private func showLodingView() {
+        view.addSubview(loadingView)
+        loadingView.frame = view.bounds
+        loadingView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
+        loadingView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
+        loadingView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        loadingView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+    }
+    
+    private func hideLoading() {
+        loadingView.removeFromSuperview()
+    }
+    
     private func fetchNewCharacters(page: Int) {
-        self.tableView.reloadData()
+        self.showLodingView()
         NetworkManager.shared.fetchPagesCharacters (page: page) { [weak self]
             result in
             guard let self = self else { return }
@@ -49,9 +68,10 @@ class MainViewController: UIViewController {
             case .success(let response):
                 if self.results.count < self.characterCount { self.hasMoreContent = false }
                 self.results += response.results
-                DispatchQueue.main.async {
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .seconds(1), execute: { () -> Void in
                     self.tableView.reloadData()
-                }
+                    self.hideLoading()
+                })
             case .failure(_):
                 return
             }
