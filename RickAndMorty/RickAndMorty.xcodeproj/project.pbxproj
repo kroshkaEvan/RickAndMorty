@@ -72,23 +72,55 @@
 		BC9C741028142B44007E28E1 /* RickAndMorty */ = {
 			isa = PBXGroup;
 			children = (
-				BC9C741128142B44007E28E1 /* AppDelegate.swift */,
-				BC9C741328142B44007E28E1 /* SceneDelegate.swift */,
-				BC9C741528142B44007E28E1 /* MainViewController.swift */,
-				BC9C742528142DA1007E28E1 /* CustomTableViewCell.swift */,
-				BC9C74332817310F007E28E1 /* DetailViewController.swift */,
-				BC9C74272814360F007E28E1 /* Character.swift */,
-				BC9C74312816FD4E007E28E1 /* LoadingView.swift */,
-				BC9C742928143905007E28E1 /* NetworkManager.swift */,
-				BC9C742B2814391E007E28E1 /* Constants.swift */,
-				BC9C742D28149520007E28E1 /* Extension.swift */,
-				BC9C742F2816D144007E28E1 /* get_schwifty.ttf */,
-				BC9C7435281741AA007E28E1 /* Samson.ttf */,
-				BC9C741A28142B49007E28E1 /* Assets.xcassets */,
-				BC9C741C28142B49007E28E1 /* LaunchScreen.storyboard */,
+				BCD3A10228183F880099EA16 /* Support files */,
+				BCD3A10128183F810099EA16 /* Model */,
+				BCD3A10028183F600099EA16 /* Views */,
 				BC9C741F28142B49007E28E1 /* Info.plist */,
 			);
 			path = RickAndMorty;
+			sourceTree = "<group>";
+		};
+		BCD3A10028183F600099EA16 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				BC9C74312816FD4E007E28E1 /* LoadingView.swift */,
+				BC9C741528142B44007E28E1 /* MainViewController.swift */,
+				BC9C742528142DA1007E28E1 /* CustomTableViewCell.swift */,
+				BC9C74332817310F007E28E1 /* DetailViewController.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		BCD3A10128183F810099EA16 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				BC9C74272814360F007E28E1 /* Character.swift */,
+				BC9C742928143905007E28E1 /* NetworkManager.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		BCD3A10228183F880099EA16 /* Support files */ = {
+			isa = PBXGroup;
+			children = (
+				BCD3A10328183F9F0099EA16 /* Fonts */,
+				BC9C741128142B44007E28E1 /* AppDelegate.swift */,
+				BC9C741328142B44007E28E1 /* SceneDelegate.swift */,
+				BC9C742B2814391E007E28E1 /* Constants.swift */,
+				BC9C742D28149520007E28E1 /* Extension.swift */,
+				BC9C741A28142B49007E28E1 /* Assets.xcassets */,
+				BC9C741C28142B49007E28E1 /* LaunchScreen.storyboard */,
+			);
+			path = "Support files";
+			sourceTree = "<group>";
+		};
+		BCD3A10328183F9F0099EA16 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				BC9C742F2816D144007E28E1 /* get_schwifty.ttf */,
+				BC9C7435281741AA007E28E1 /* Samson.ttf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
