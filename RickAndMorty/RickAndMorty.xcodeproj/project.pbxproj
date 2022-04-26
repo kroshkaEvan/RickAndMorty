@@ -21,7 +21,6 @@
 		BC9C74322816FD4E007E28E1 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC9C74312816FD4E007E28E1 /* LoadingView.swift */; };
 		BC9C74342817310F007E28E1 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC9C74332817310F007E28E1 /* DetailViewController.swift */; };
 		BC9C7436281741AA007E28E1 /* Samson.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BC9C7435281741AA007E28E1 /* Samson.ttf */; };
-		BC9C74382817498D007E28E1 /* DetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC9C74372817498C007E28E1 /* DetailTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,7 +40,6 @@
 		BC9C74312816FD4E007E28E1 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		BC9C74332817310F007E28E1 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		BC9C7435281741AA007E28E1 /* Samson.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Samson.ttf; sourceTree = "<group>"; };
-		BC9C74372817498C007E28E1 /* DetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,7 +77,6 @@
 				BC9C741528142B44007E28E1 /* MainViewController.swift */,
 				BC9C742528142DA1007E28E1 /* CustomTableViewCell.swift */,
 				BC9C74332817310F007E28E1 /* DetailViewController.swift */,
-				BC9C74372817498C007E28E1 /* DetailTableViewCell.swift */,
 				BC9C74272814360F007E28E1 /* Character.swift */,
 				BC9C74312816FD4E007E28E1 /* LoadingView.swift */,
 				BC9C742928143905007E28E1 /* NetworkManager.swift */,
@@ -176,7 +173,6 @@
 				BC9C74342817310F007E28E1 /* DetailViewController.swift in Sources */,
 				BC9C742E28149520007E28E1 /* Extension.swift in Sources */,
 				BC9C74322816FD4E007E28E1 /* LoadingView.swift in Sources */,
-				BC9C74382817498D007E28E1 /* DetailTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

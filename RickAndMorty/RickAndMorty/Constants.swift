@@ -18,7 +18,11 @@ class Constants {
         static let customFont = UIFont(name: "Samson",
                              size: 20)
         static let nameFont = UIFont(name: "get schwifty",
-                             size: 28)
+                             size: 24)
+        static let customDescriptionFont = UIFont(name: "Samson",
+                             size: 24)
+        static let nameDescriptionFont = UIFont(name: "get schwifty",
+                             size: 30)
     }
     
     class Color {

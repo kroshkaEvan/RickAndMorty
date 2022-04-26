@@ -31,7 +31,7 @@ class DetailViewController: UIViewController {
     lazy var nameLabel: UILabel = {
         let label = UILabel()
         label.addDescriptionLabel()
-        label.font = Constants.Font.nameFont
+        label.font = Constants.Font.nameDescriptionFont
         return label
     }()
     
@@ -59,28 +59,20 @@ class DetailViewController: UIViewController {
         return label
     }()
     
-    lazy var tableView: UITableView = {
-        let tableView = UITableView()
-        tableView.backgroundColor = .darkGray
-        tableView.register(DetailTableViewCell.self,
-                           forCellReuseIdentifier: DetailTableViewCell.identifier)
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        return tableView
+    lazy var episodesCountLabel: UILabel = {
+        let label = UILabel()
+        label.addDescriptionLabel()
+        return label
     }()
-    
-    var episodes = [String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .darkGray
-        tableView.delegate = self
-        tableView.dataSource = self
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Back".localizated(),
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Back",
                                                            style: .done,
                                                            target: self,
                                                            action: #selector(didTapBack))
-        self.tableView.reloadData()
-        print("\(episodes)")
+        navigationItem.leftBarButtonItem?.tintColor = Constants.Color.nameColor
         setupScrollView()
         setupUI()
     }
@@ -101,7 +93,7 @@ class DetailViewController: UIViewController {
     private func setupUI() {
         let distanceY = CGFloat(10)
         let sizeIcon = CGFloat(240)
-        [iconCharacterImageView, nameLabel, speciesLabel, genderLabel, statusLabel, locationLabel, tableView].forEach { contentView.addSubview($0) }
+        [iconCharacterImageView, nameLabel, speciesLabel, genderLabel, statusLabel, locationLabel, episodesCountLabel].forEach { contentView.addSubview($0) }
         iconCharacterImageView.layer.cornerRadius = sizeIcon / 2
         iconCharacterImageView.topAnchor.constraint(equalTo: contentView.topAnchor,
                                                     constant: 50).isActive = true
@@ -117,17 +109,13 @@ class DetailViewController: UIViewController {
         genderLabel.setupUI(view: contentView, top: speciesLabel)
         statusLabel.setupUI(view: contentView, top: genderLabel)
         locationLabel.setupUI(view: contentView, top: statusLabel)
-        tableView.topAnchor.constraint(equalTo: locationLabel.bottomAnchor,
-                                       constant: distanceY).isActive = true
-        tableView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
-        tableView.widthAnchor.constraint(equalTo: contentView.widthAnchor,
-                                         multiplier: 0.6).isActive = true
-        tableView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor,
+        episodesCountLabel.setupUI(view: contentView, top: locationLabel)
+        episodesCountLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor,
                                           constant: -distanceY).isActive = true
     }
     
     func getImageFromURL(id: String) {
-        let url: URL = URL(string: "https://rickandmortyapi.com/api/character/avatar/\(id).jpeg")!
+        guard let url = URL(string: "\(Constants.Strings.URL)/character/avatar/\(id).jpeg") else { return }
         let dataTask = URLSession.shared.dataTask(with: url) { [weak self] (data, _, _) in
             if let data = data {
                 DispatchQueue.main.async {
@@ -140,29 +128,5 @@ class DetailViewController: UIViewController {
     
     @objc private func didTapBack() {
         dismiss(animated: true, completion: nil)
-    }
-}
-
-extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.episodes.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: DetailTableViewCell.identifier,
-                                                 for: indexPath)
-        if let cell = cell as? DetailTableViewCell {
-            cell.episodeLabel.text = episodes[indexPath.row]
-        }
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 20
-    }
-
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
     }
 }

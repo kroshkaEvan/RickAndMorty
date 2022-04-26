@@ -50,8 +50,8 @@ class MainViewController: UIViewController {
     private func showLodingView() {
         view.addSubview(loadingView)
         loadingView.frame = view.bounds
-        loadingView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
-        loadingView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
+        loadingView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        loadingView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         loadingView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         loadingView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
     }
@@ -124,7 +124,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         detailVC.genderLabel.text = indexPathTapped.gender
         detailVC.statusLabel.text = indexPathTapped.status
         detailVC.locationLabel.text = indexPathTapped.location.name
-        detailVC.episodes = indexPathTapped.episode
+        detailVC.episodesCountLabel.text = "Number of appearances: \(indexPathTapped.episode.count)"
         let navigationVc = UINavigationController(rootViewController: detailVC)
         navigationVc.modalPresentationStyle = .fullScreen
         navigationVc.navigationBar.tintColor = .darkGray

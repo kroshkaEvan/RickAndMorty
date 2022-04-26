@@ -30,8 +30,8 @@ class DetailTableViewCell: UITableViewCell {
         self.addSubview(episodeLabel)
         episodeLabel.topAnchor.constraint(equalTo: self.topAnchor,
                                        constant: 5).isActive = true
-        episodeLabel.leadingAnchor.constraint(equalTo: self.trailingAnchor,
-                                           constant: 5).isActive = true
+        episodeLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
+        episodeLabel.widthAnchor.constraint(equalTo: self.widthAnchor).isActive = true
         episodeLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
     }
 }

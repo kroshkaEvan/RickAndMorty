@@ -36,6 +36,10 @@ struct Episode: Codable {
     let created: String
 }
 
+struct AllEpisodes: Codable {
+    var results: [Episode]
+}
+
 struct Location: Codable {
     let name: String
 }

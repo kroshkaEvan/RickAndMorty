@@ -73,7 +73,7 @@ class CustomTableViewCell: UITableViewCell {
     }
     
     func getImageFromURL(id: String) {
-        let url: URL = URL(string: "https://rickandmortyapi.com/api/character/avatar/\(id).jpeg")!
+        guard let url = URL(string: "\(Constants.Strings.URL)/character/avatar/\(id).jpeg") else { return }
         let dataTask = URLSession.shared.dataTask(with: url) { [weak self] (data, _, _) in
             if let data = data {
                 DispatchQueue.main.async {

@@ -17,7 +17,7 @@ extension UILabel {
     }
     
     func addDescriptionLabel() {
-        font = Constants.Font.customFont
+        font = Constants.Font.customDescriptionFont
         textColor = Constants.Color.nameColor
         textAlignment = .center
         translatesAutoresizingMaskIntoConstraints = false
@@ -28,7 +28,7 @@ extension UILabel {
                              constant: 10).isActive = true
         centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         widthAnchor.constraint(equalTo: view.widthAnchor,
-                               multiplier: 0.8).isActive = true
+                               multiplier: 0.95).isActive = true
     }
 }
 
@@ -39,15 +39,5 @@ extension UIView {
     
     var height: CGFloat{
         return self.frame.size.height
-    }
-}
-
-extension String {
-    func localizated() -> String {
-        return NSLocalizedString(self,
-                                 tableName: "Localizable",
-                                 bundle: .main,
-                                 value: self,
-                                 comment: self)
     }
 }
