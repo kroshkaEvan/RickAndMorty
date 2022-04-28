@@ -31,4 +31,13 @@ class Constants {
                                        blue: 166 / 255,
                                        alpha: 1)
     }
+    
+    class Icon {
+        static let iconBlackRed = UIImage(named: "redBlack")
+        static let iconBlackBlue = UIImage(named: "blueBlack")
+        static let iconBlackPurple = UIImage(named: "purpleBlack")
+        static let iconRed = UIImage(named: "red")
+        static let iconBlue = UIImage(named: "blue")
+        static let iconPurple = UIImage(named: "purple")
+    }
 }
