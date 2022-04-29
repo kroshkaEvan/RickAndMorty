@@ -92,7 +92,7 @@ class DetailViewController: UIViewController {
     
     private func setupUI() {
         let distanceY = CGFloat(10)
-        let sizeIcon = CGFloat(240)
+        let sizeIcon = view.bounds.width * 0.8
         [iconCharacterImageView, nameLabel, speciesLabel, genderLabel, statusLabel, locationLabel, episodesCountLabel].forEach { contentView.addSubview($0) }
         iconCharacterImageView.layer.cornerRadius = sizeIcon / 2
         iconCharacterImageView.topAnchor.constraint(equalTo: contentView.topAnchor,

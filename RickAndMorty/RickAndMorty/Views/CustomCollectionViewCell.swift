@@ -1,5 +1,5 @@
 //
-//  CustomTableViewCell.swift
+//  CustomCollectionViewCell.swift
 //  RickAndMorty
 //
 //  Created by Эван Крошкин on 23.04.22.
@@ -8,7 +8,7 @@
 import UIKit
 
 class CustomCollectionViewCell: UICollectionViewCell {
-    static let identifier = "CustomTableViewCell"
+    static let identifier = "CustomCollectionViewCell"
 
     lazy var iconCharacterImageView: UIImageView = {
         let imageView = UIImageView()
@@ -41,20 +41,38 @@ class CustomCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         activateConstraints()
+        shadowDecorate()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+    private func shadowDecorate() {
+        let radius: CGFloat = 10
+        contentView.layer.cornerRadius = radius
+        contentView.layer.borderWidth = 1
+        contentView.layer.borderColor = UIColor.lightGray.cgColor
+        contentView.layer.masksToBounds = true
+        layer.shadowColor = Constants.Color.nameColor.cgColor
+        layer.shadowOffset = CGSize(width: 0, height: 1.0)
+        layer.shadowRadius = 4.5
+        layer.shadowOpacity = 3
+        layer.masksToBounds = false
+        layer.shadowPath = UIBezierPath(roundedRect: bounds,
+                                        cornerRadius: radius).cgPath
+        layer.cornerRadius = radius
+    }
+    
     private func activateConstraints() {
         self.backgroundColor = .darkGray
+        let sizeIcon = self.bounds.height * 0.95
         [iconCharacterImageView, nameLabel, speciesLabel, genderLabel].forEach { self.addSubview($0) }
         iconCharacterImageView.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
         iconCharacterImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor,
-                                                        constant: 10).isActive = true
-        iconCharacterImageView.widthAnchor.constraint(equalToConstant: 100).isActive = true
-        iconCharacterImageView.heightAnchor.constraint(equalToConstant: 100).isActive = true
+                                                        constant: 2.5).isActive = true
+        iconCharacterImageView.widthAnchor.constraint(equalToConstant: sizeIcon).isActive = true
+        iconCharacterImageView.heightAnchor.constraint(equalToConstant: sizeIcon).isActive = true
         nameLabel.topAnchor.constraint(equalTo: self.topAnchor,
                                        constant: 10).isActive = true
         nameLabel.leadingAnchor.constraint(equalTo: iconCharacterImageView.trailingAnchor,

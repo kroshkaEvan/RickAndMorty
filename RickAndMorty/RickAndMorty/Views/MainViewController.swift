@@ -10,16 +10,16 @@ import UIKit
 class MainViewController: UIViewController {
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
-        let cellsSpacing = CGFloat(4)
-        layout.sectionInset = UIEdgeInsets(top: cellsSpacing / 2,
-                                           left: cellsSpacing,
-                                           bottom: cellsSpacing / 2,
-                                           right: cellsSpacing)
+        let cellsSpacing = CGFloat(10)
+        layout.sectionInset = UIEdgeInsets(top: cellsSpacing ,
+                                           left: cellsSpacing / 2,
+                                           bottom: cellsSpacing,
+                                           right: cellsSpacing / 2)
         let cellWidth = (view.bounds.width
                          - layout.sectionInset.left
                          - layout.sectionInset.right
                          - cellsSpacing)
-        let cellHeight = cellWidth / 2
+        let cellHeight = cellWidth / 2.4
         layout.minimumLineSpacing = cellsSpacing
         layout.minimumInteritemSpacing = cellsSpacing
         layout.itemSize = CGSize(width: cellWidth, height: cellHeight)
