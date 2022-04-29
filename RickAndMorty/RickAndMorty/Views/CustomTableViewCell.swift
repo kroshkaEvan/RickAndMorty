@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CustomTableViewCell: UITableViewCell {
+class CustomCollectionViewCell: UICollectionViewCell {
     static let identifier = "CustomTableViewCell"
 
     lazy var iconCharacterImageView: UIImageView = {
@@ -38,8 +38,8 @@ class CustomTableViewCell: UITableViewCell {
         return label
     }()
     
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         activateConstraints()
     }
     
