@@ -9,7 +9,7 @@ import UIKit
 
 class CustomCollectionViewCell: UICollectionViewCell {
     static let identifier = "CustomCollectionViewCell"
-
+    
     lazy var iconCharacterImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
@@ -46,6 +46,43 @@ class CustomCollectionViewCell: UICollectionViewCell {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        animateCell(isHighlighted: true)
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesEnded(touches, with: event)
+        animateCell(isHighlighted: false)
+    }
+    
+    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesCancelled(touches, with: event)
+        animateCell(isHighlighted: false)
+    }
+    
+    private func animateCell(isHighlighted: Bool,
+                         completion: ((Bool) -> Void)?=nil) {
+        let animationOptions: UIView.AnimationOptions = [.allowUserInteraction]
+        if isHighlighted {
+            UIView.animate(withDuration: 0.5,
+                           delay: 0.25,
+                           usingSpringWithDamping: 1,
+                           initialSpringVelocity: 0,
+                           options: animationOptions, animations: {
+                self.transform = .init(scaleX: 0.92, y: 0.92)
+            }, completion: completion)
+        } else {
+            UIView.animate(withDuration: 0.5,
+                           delay: 0,
+                           usingSpringWithDamping: 1,
+                           initialSpringVelocity: 0,
+                           options: animationOptions, animations: {
+                self.transform = .identity
+            }, completion: completion)
+        }
     }
     
     private func shadowDecorate() {
