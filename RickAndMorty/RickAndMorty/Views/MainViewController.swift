@@ -28,8 +28,8 @@ class MainViewController: UIViewController {
                                             height: sectionHeight)
         let collectionView = UICollectionView(frame: self.view.frame,
                                               collectionViewLayout: layout)
-        collectionView.register(CustomCollectionViewCell.self,
-                                forCellWithReuseIdentifier: CustomCollectionViewCell.identifier)
+        collectionView.register(MainCollectionViewCell.self,
+                                forCellWithReuseIdentifier: MainCollectionViewCell.identifier)
         collectionView.backgroundColor = .lightGray
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         return collectionView
@@ -104,9 +104,9 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CustomCollectionViewCell.identifier,
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MainCollectionViewCell.identifier,
                                                       for: indexPath)
-        if let cell = cell as? CustomCollectionViewCell {
+        if let cell = cell as? MainCollectionViewCell {
             cell.getImageFromURL(id: String(results[indexPath.row].id))
             cell.nameLabel.text = results[indexPath.row].name
             cell.speciesLabel.text = results[indexPath.row].species

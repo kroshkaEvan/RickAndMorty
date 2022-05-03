@@ -7,8 +7,8 @@
 
 import UIKit
 
-class CustomCollectionViewCell: UICollectionViewCell {
-    static let identifier = "CustomCollectionViewCell"
+class MainCollectionViewCell: UICollectionViewCell {
+    static let identifier = "MainCollectionViewCell"
     
     lazy var iconCharacterImageView: UIImageView = {
         let imageView = UIImageView()
