@@ -12,14 +12,13 @@ class MainViewController: UIViewController {
         let layout = UICollectionViewFlowLayout()
         let cellsSpacing = CGFloat(10)
         layout.sectionInset = UIEdgeInsets(top: cellsSpacing ,
-                                           left: cellsSpacing / 2,
+                                           left: cellsSpacing ,
                                            bottom: cellsSpacing,
-                                           right: cellsSpacing / 2)
+                                           right: cellsSpacing )
         let cellWidth = (view.bounds.width
-                         - layout.sectionInset.left
-                         - layout.sectionInset.right
-                         - cellsSpacing)
-        let cellHeight = cellWidth / 2.4
+                         - cellsSpacing
+                         * (CGFloat(numberOfItemsInSection) + 1)) / CGFloat(numberOfItemsInSection)
+        let cellHeight = cellWidth * 1.2
         layout.minimumLineSpacing = cellsSpacing
         layout.minimumInteritemSpacing = cellsSpacing
         layout.itemSize = CGSize(width: cellWidth, height: cellHeight)
@@ -47,6 +46,7 @@ class MainViewController: UIViewController {
     private var page = 1
     private let delay = 1
     private var hasMoreContent = true
+    private let numberOfItemsInSection = 2
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -78,6 +78,27 @@ class MainViewController: UIViewController {
         loadingView.removeFromSuperview()
     }
     
+    private func scrollToLast() {
+        let numberOfSections = collectionView.numberOfSections
+        let lastSection = numberOfSections - 1
+        let numberOfItems = collectionView.numberOfItems(inSection: lastSection)
+        guard numberOfSections > 0 && numberOfItems > 0 else {
+            return
+        }
+        let lastItemIndexPath = IndexPath(item: numberOfItems - 21,
+                                          section: lastSection)
+        collectionView.scrollToItem(at: lastItemIndexPath,
+                                    at: .top,
+                                    animated: true)
+    }
+    
+    private func animateLoadCollectionView() {
+        UIView.transition(with: self.collectionView,
+                          duration: 0.7,
+                          options: .transitionCrossDissolve,
+                          animations: {self.collectionView.reloadData()}, completion: nil)
+    }
+    
     private func fetchNewCharacters(page: Int) {
         self.showLodingView()
         NetworkManager.shared.fetchPagesCharacters (page: page) { [weak self]
@@ -88,8 +109,9 @@ class MainViewController: UIViewController {
                 if self.results.count < self.characterCount { self.hasMoreContent = false }
                 self.results += response.results
                 DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .seconds(self.delay), execute: { () -> Void in
-                    self.collectionView.reloadData()
+                    self.animateLoadCollectionView()
                     self.hideLoading()
+                    self.scrollToLast()
                 })
             case .failure(_):
                 return
@@ -109,20 +131,6 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
         if let cell = cell as? MainCollectionViewCell {
             cell.getImageFromURL(id: String(results[indexPath.row].id))
             cell.nameLabel.text = results[indexPath.row].name
-            cell.speciesLabel.text = results[indexPath.row].species
-            switch cell.speciesLabel.text {
-            case "Alien" :  cell.speciesLabel.textColor = .green
-            case "Humanoid" : cell.speciesLabel.textColor = .cyan
-            case "Human" : cell.speciesLabel.textColor = .yellow
-            case "unknown" : cell.speciesLabel.textColor = .white
-            default : cell.speciesLabel.textColor = .brown
-            }
-            cell.genderLabel.text = results[indexPath.row].gender
-            switch cell.genderLabel.text {
-            case "Male" : cell.genderLabel.textColor = .blue
-            case "Female" : cell.genderLabel.textColor = .systemPink
-            default : cell.genderLabel.textColor = .white
-            }
         }
         return cell
     }
@@ -139,10 +147,7 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
         detailVC.statusLabel.text = indexPathTapped.status
         detailVC.locationLabel.text = indexPathTapped.location.name
         detailVC.episodesCountLabel.text = "Number of appearances: \(indexPathTapped.episode.count)"
-        let navigationVc = UINavigationController(rootViewController: detailVC)
-        navigationVc.modalPresentationStyle = .fullScreen
-        navigationVc.navigationBar.tintColor = .darkGray
-        self.present(navigationVc, animated: true)
+        self.navigationController?.pushViewController(detailVC, animated: true)
     }
     
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {

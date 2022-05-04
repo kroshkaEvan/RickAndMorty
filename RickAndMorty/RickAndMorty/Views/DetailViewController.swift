@@ -74,7 +74,7 @@ class DetailViewController: UIViewController {
                                                            action: #selector(didTapBack))
         navigationItem.leftBarButtonItem?.tintColor = Constants.Color.nameColor
         setupScrollView()
-        setupUI()
+        animateLoadView()
     }
     
     private func setupScrollView() {
@@ -114,6 +114,16 @@ class DetailViewController: UIViewController {
                                           constant: -distanceY).isActive = true
     }
     
+    private func animateLoadView() {
+        DispatchQueue.main.async {
+            UIView.transition(with: self.view,
+                              duration: 0.7,
+                              options: .transitionFlipFromLeft,
+                              animations: nil, completion: nil)
+            self.setupUI()
+        }
+    }
+    
     func getImageFromURL(id: String) {
         guard let url = URL(string: "\(Constants.Strings.URL)/character/avatar/\(id).jpeg") else { return }
         let dataTask = URLSession.shared.dataTask(with: url) { [weak self] (data, _, _) in
@@ -127,6 +137,6 @@ class DetailViewController: UIViewController {
     }
     
     @objc private func didTapBack() {
-        dismiss(animated: true, completion: nil)
+        self.navigationController?.popToRootViewController(animated: true)
     }
 }

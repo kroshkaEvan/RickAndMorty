@@ -13,6 +13,8 @@ extension UILabel {
         font = Constants.Font.customFont
         textColor = Constants.Color.nameColor
         textAlignment = .center
+        adjustsFontSizeToFitWidth = true
+        minimumScaleFactor = 0.5
         translatesAutoresizingMaskIntoConstraints = false
     }
     
@@ -20,6 +22,8 @@ extension UILabel {
         font = Constants.Font.customDescriptionFont
         textColor = Constants.Color.nameColor
         textAlignment = .center
+        adjustsFontSizeToFitWidth = true
+        minimumScaleFactor = 0.5
         translatesAutoresizingMaskIntoConstraints = false
     }
     

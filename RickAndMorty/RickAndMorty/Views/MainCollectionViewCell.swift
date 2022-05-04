@@ -26,18 +26,6 @@ class MainCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
-    lazy var speciesLabel: UILabel = {
-        let label = UILabel()
-        label.addCustomLabel()
-        return label
-    }()
-    
-    lazy var genderLabel: UILabel = {
-        let label = UILabel()
-        label.addCustomLabel()
-        return label
-    }()
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         activateConstraints()
@@ -68,7 +56,7 @@ class MainCollectionViewCell: UICollectionViewCell {
         let animationOptions: UIView.AnimationOptions = [.allowUserInteraction]
         if isHighlighted {
             UIView.animate(withDuration: 0.5,
-                           delay: 0.25,
+                           delay: 0.3,
                            usingSpringWithDamping: 1,
                            initialSpringVelocity: 0,
                            options: animationOptions, animations: {
@@ -103,28 +91,20 @@ class MainCollectionViewCell: UICollectionViewCell {
     
     private func activateConstraints() {
         self.backgroundColor = .darkGray
-        let sizeIcon = self.bounds.height * 0.95
-        [iconCharacterImageView, nameLabel, speciesLabel, genderLabel].forEach { self.addSubview($0) }
-        iconCharacterImageView.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
-        iconCharacterImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor,
-                                                        constant: 2.5).isActive = true
+        let sizeIcon = self.bounds.width * 0.95
+        [iconCharacterImageView, nameLabel].forEach { self.addSubview($0) }
+        iconCharacterImageView.topAnchor.constraint(equalTo: self.topAnchor,
+                                                    constant: 5).isActive = true
+        iconCharacterImageView.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
         iconCharacterImageView.widthAnchor.constraint(equalToConstant: sizeIcon).isActive = true
         iconCharacterImageView.heightAnchor.constraint(equalToConstant: sizeIcon).isActive = true
-        nameLabel.topAnchor.constraint(equalTo: self.topAnchor,
-                                       constant: 10).isActive = true
-        nameLabel.leadingAnchor.constraint(equalTo: iconCharacterImageView.trailingAnchor,
-                                           constant: 10).isActive = true
+        nameLabel.topAnchor.constraint(equalTo: iconCharacterImageView.bottomAnchor,
+                                       constant: 5).isActive = true
+        nameLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor,
+                                           constant: 2).isActive = true
+        nameLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor,
+                                            constant: -2).isActive = true
         nameLabel.heightAnchor.constraint(equalToConstant: 30).isActive = true
-        speciesLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor,
-                                          constant: 10).isActive = true
-        speciesLabel.leadingAnchor.constraint(equalTo: iconCharacterImageView.trailingAnchor,
-                                              constant: 10).isActive = true
-        speciesLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
-        genderLabel.topAnchor.constraint(equalTo: speciesLabel.bottomAnchor,
-                                         constant: 10).isActive = true
-        genderLabel.leadingAnchor.constraint(equalTo: iconCharacterImageView.trailingAnchor,
-                                             constant: 10).isActive = true
-        genderLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
     }
     
     func getImageFromURL(id: String) {
